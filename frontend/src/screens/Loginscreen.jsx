@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { baseURL } from '../constants/utils.js';
-import Cookies from 'js-cookie'
 const Loginscreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,6 +13,7 @@ const Loginscreen = () => {
       const { data } = await axios.post(`${baseURL}/api/users/login`, { email, password },{
         withCredentials: true // Necessary to receive cookies
       });
+      console.log(data)
       navigate('/profile');
     } catch (error) {
       console.error(error);
