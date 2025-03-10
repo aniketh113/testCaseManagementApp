@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import {baseURL} from '../constants/utils.js'
+import {baseURL} from '../constants/utils.js';
+import Cookies from 'js-cookie';
+
 const Registerscreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,8 +18,10 @@ const Registerscreen = () => {
       return;
     }
     try {
-      const { data } = await axios.post( `${baseURL}/api/users/register`, { name, email, password });
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      const { data } = await axios.post( `${baseURL}/api/users/register`, { name, email, password },{
+        withCredentials:true
+      });
+      console.log(data)
       navigate('/profile');
     } catch (error) {
       console.error(error);

@@ -6,7 +6,7 @@
   "author": "",
   "type": "module",
   "main": "index.js",
-  "proxy": "http://localhost:4000",
+  "proxy": "http://localhost:4001",
   "scripts": {
     "dev": "nodemon -r dotenv/config --experimental-json-modules backend/index.js"
   },

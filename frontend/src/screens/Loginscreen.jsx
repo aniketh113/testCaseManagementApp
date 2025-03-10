@@ -13,6 +13,7 @@ const Loginscreen = () => {
       const { data } = await axios.post(`${baseURL}/api/users/login`, { email, password },{
         withCredentials: true // Necessary to receive cookies
       });
+      console.log(data)
       navigate('/profile');
     } catch (error) {
       console.error(error);
