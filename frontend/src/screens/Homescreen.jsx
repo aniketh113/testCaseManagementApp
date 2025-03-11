@@ -38,7 +38,7 @@ const Homescreen = () => {
             </div>
               <div className='col-5'>
               <form onSubmit={submitHandler}>
-                    <div className='mb-5 me-3'>
+                    <div className='mb-3 me-3'>
                       <label className='form-label'>Email Address</label>
                       <input
                         type="email" className='form-control'
