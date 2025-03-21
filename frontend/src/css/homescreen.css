@@ -1,19 +1,22 @@
 body{
-    background-image: url("/public/sharedpictures/backgroundimg.jpg");
+    background-image: url("/sharedpictures/backgroundimg.svg");
     background-size: cover;
     background-repeat: no-repeat;
 }
-.heading{
-    font-family: "Libre Franklin", sans-serif;
+.fontStyle{
+    font-family: "Barlow", sans-serif;
 }
 .innerContainer{
     margin-top: 25px;
     border-radius: 10px;
     height:auto;
-    background-color: #9d9d9d;
-    box-shadow: rgba(0, 0, 0, 0.34) 0px 5px 10px;;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.34) 0px 5px 10px;
 }
 #coverimage{
-    height: 360px;
+    height: 400px;
     width: 900px;
+    border: 1px solid black;
+    border-radius: 50%;
+    box-shadow: rgba(0.30, 0, 0.2, 0.34) 0px 8px 20px;
 }
