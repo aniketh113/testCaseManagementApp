@@ -32,9 +32,9 @@ const Homescreen = () => {
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
-              <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div className="collapse navbar-collapse justify-content-center">
                 <div className="navbar-nav">
-                  <a className="nav-link active" aria-current="page" href="#">Home</a>
+                  <a className="nav-link active" aria-current="page" href="/">Home</a>
                   <a className="nav-link" href="#">Features</a>
                   <a className="nav-link" href="#">Pricing</a>
                 </div>
@@ -54,7 +54,7 @@ const Homescreen = () => {
         <div className='innerContainer pt-4'>
             <div className="row ms-2">
             <div class="col-7 mb-4">
-            <img class="img-fluid rounded mb-4 mb-lg-0" id='coverimage' src="/public/sharedpictures/coverimage.svg" alt="..." />
+            <img class="img-fluid rounded mb-4 mb-lg-0" id='coverimage' src="/sharedpictures/coverimage.svg" alt="..." />
             </div>
               <div className='col-4'>
               <form onSubmit={submitHandler}>
@@ -80,8 +80,9 @@ const Homescreen = () => {
               </div>
             </div>
         </div>
-      
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-body-secondary">
+      </div>
+      {/* footer starts here */}
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top bg-body-transparent">
           <p class="col-md-4 mb-0 text-body-secondary">&copy; 2024 Company, Inc</p>
 
           <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -96,8 +97,6 @@ const Homescreen = () => {
             <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
           </ul>
         </footer>
-      </div>
-      
       </div>
     );
   };

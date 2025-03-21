@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import User from '../models/user.models.js'
-import {Project, Subproject, Testcase} from '../models/project.models.js'
+import {Project, Subproject, Testcase, Testscenario} from '../models/project.models.js'
 //this is to create the main project controller.
 const createProject = asyncHandler(async (req, res) => {
   const {name} = req.body;
@@ -30,7 +30,7 @@ const createSubProject = asyncHandler(async(req,res)=>{
         name
       });
    await Project.findByIdAndUpdate(projectid, {
-        $set: {
+        $push: {
           subproject: subproject._id
         }
       });
@@ -46,7 +46,7 @@ const createSubProject = asyncHandler(async(req,res)=>{
 })
 
 
-//this is to create subprojects under the project which they are in.
+//this is to create testcases under the sub project which they are in.
 const createTestCases= asyncHandler(async(req,res)=>{
 const{testcasename,status,lastexecutionstatus,priority,assignedto ,subprojectid}= req.body;
 
@@ -57,7 +57,7 @@ if(user){
     testcasename,status,lastexecutionstatus,priority,assignedto
   })
   await Subproject.findByIdAndUpdate(subprojectid, {
-    $set: {
+    $push: {
       testCaseSchema: testcase._id
     }
   });
@@ -67,12 +67,37 @@ if(user){
   });
 }
 else{
-
+  res.status(404);
+  throw new Error('User not logged in');
 }
-
-
 })
 
 
+//this is to create testcases under the sub project which they are in.
+const createTestScenarios= asyncHandler(async(req,res)=>{
+  const{scenario,testcaseid}= req.body;
+  
+  const user = await User.findById(req.user._id);
+  
+  if(user){
+    const testscenario = await Testscenario.create({
+      scenario,testcaseid
+    })
+    await Testcase.findByIdAndUpdate(testcaseid, {
+      $push: {
+        scenario: testscenario._id
+      }
+    });
+    res.status(201).json({
+      scenario: testscenario.scenario,
+      testScenarioId: testscenario._id
+    });
+  }
+  else{
+    res.status(404);
+    throw new Error('User not logged in');
+  }
+  })
 
-export {createProject, createSubProject, createTestCases}
+
+export {createProject, createSubProject, createTestCases, createTestScenarios }

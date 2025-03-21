@@ -14,12 +14,6 @@ const Testscenario = mongoose.model('Testscenario',testScenario)
 
 
 
-
-
-
-
-
-
 const testCaseSchema = new mongoose.Schema({
 testcaseid:{
     type:String,
@@ -90,4 +84,4 @@ const projectSchema = mongoose.Schema({
 
  const Project = mongoose.model("Project", projectSchema)
 
- export  {Project, Subproject, Testcase }
+ export  {Project, Subproject, Testcase, Testscenario }
