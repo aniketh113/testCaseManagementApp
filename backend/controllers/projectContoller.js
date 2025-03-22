@@ -111,17 +111,16 @@ const createTestScenarios= asyncHandler(async(req,res)=>{
   })
 
 // @desc    this is to fetch the projects for the user requesting it.
-// POST     /api/project/projects
+// POST     /api/project/getprojects
 // @access  Private
 const getUserProjects = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-
+    const projects = await Project.find({_id: { $in: user.projects } })
+    const projectNames = projects.map(project => project.name);
   if (user) {
     res.json({
       _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
+      projects: projectNames,
     });
   } else {
     res.status(404);
@@ -129,4 +128,4 @@ const getUserProjects = asyncHandler(async (req, res) => {
   }
 });
 
-export {createProject, createSubProject, createTestCases, createTestScenarios }
+export {createProject, createSubProject, createTestCases, createTestScenarios, getUserProjects}
