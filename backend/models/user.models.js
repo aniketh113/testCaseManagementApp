@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
+import { Project } from './project.models.js';
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -19,6 +20,10 @@ const userSchema = mongoose.Schema({
     enum: ['Admin', 'Tester', 'Developer', 'Viewer'],
     default: 'Viewer',
   },
+  projects:[{
+    type: Schema.Types.ObjectId,
+    ref:Project
+  }]
 }, {
   timestamps: true,
 });

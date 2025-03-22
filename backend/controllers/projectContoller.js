@@ -1,7 +1,10 @@
 import asyncHandler from 'express-async-handler'
 import User from '../models/user.models.js'
 import {Project, Subproject, Testcase, Testscenario} from '../models/project.models.js'
-//this is to create the main project controller.
+
+// @desc    this is to create the main project controller.
+// POST     /api/project/createproject
+// @access  Private
 const createProject = asyncHandler(async (req, res) => {
   const {name} = req.body;
     const user = await User.findById(req.user._id);
@@ -9,6 +12,11 @@ const createProject = asyncHandler(async (req, res) => {
       const project = await Project.create({
         name,
         user
+      });
+      await User.findByIdAndUpdate(user._id, {
+        $push: {
+          projects: project._id
+        }
       });
       res.status(201).json({
         name: project.name,
@@ -20,8 +28,9 @@ const createProject = asyncHandler(async (req, res) => {
     }
   });
 
-
-//this is to create subprojects under the project which they are in.
+// @desc    this is to create subprojects under the project which they are in.
+// POST     /api/project/createsubproject
+// @access  Private
 const createSubProject = asyncHandler(async(req,res)=>{
   const { name, projectid} = req.body;
     const user = await User.findById(req.user._id);
@@ -45,8 +54,9 @@ const createSubProject = asyncHandler(async(req,res)=>{
     }
 })
 
-
-//this is to create testcases under the sub project which they are in.
+// @desc    this is to create testcases under the sub project which they are in.
+// POST     /api/project/createtestcase
+// @access  Private
 const createTestCases= asyncHandler(async(req,res)=>{
 const{testcasename,status,lastexecutionstatus,priority,assignedto ,subprojectid}= req.body;
 
@@ -72,8 +82,9 @@ else{
 }
 })
 
-
-//this is to create testcases under the sub project which they are in.
+// @desc    this is to create testcases under the sub project which they are in.
+// POST     /api/project/createscenario
+// @access  Private
 const createTestScenarios= asyncHandler(async(req,res)=>{
   const{scenario,testcaseid}= req.body;
   
@@ -99,5 +110,23 @@ const createTestScenarios= asyncHandler(async(req,res)=>{
   }
   })
 
+// @desc    this is to fetch the projects for the user requesting it.
+// POST     /api/project/projects
+// @access  Private
+const getUserProjects = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
 
 export {createProject, createSubProject, createTestCases, createTestScenarios }
