@@ -4,6 +4,8 @@ import Homescreen from './screens/Homescreen';
 import Registerscreen from './screens/Registerscreen';
 import Profilescreen from './screens/Profilescreen';
 import Loginscreen from './screens/Loginscreen';
+import Projecthomescreen from './screens/Projecthomescreen';
+import Projects from './screens/Projects';
 
 const App = () => {
   return (
@@ -13,6 +15,8 @@ const App = () => {
         <Route path='/login' element={<Loginscreen />} />
         <Route path='/register' element={<Registerscreen />} />
         <Route path='/profile' element={<Profilescreen />} />
+        <Route path='/dashboard' element={<Projecthomescreen />}/>
+        <Route path='/projects' element={<Projects />}/>
       </Routes>
     </Router>
   );

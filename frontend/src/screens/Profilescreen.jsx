@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../constants/utils.js';
+import Projecthomescreen from './Projecthomescreen.jsx';
 import Cookies from 'js-cookie';
 
 const Profilescreen = () => {
@@ -59,9 +60,10 @@ const Profilescreen = () => {
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
       <p>Role: {user.role}</p>
-      <button onClick={ handleLogout }>
+      <button className='btn btn-primary' onClick={ handleLogout }>
       Logout
     </button>
+    <a className="btn btn-primary"href="/dashboard">Dashboard</a>
     </div>
   );
 };
