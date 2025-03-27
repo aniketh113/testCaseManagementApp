@@ -34,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Auth user & get token
- // POST /api/users/login
+// POST /api/users/login
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -75,12 +75,10 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-const userLogOut = asyncHandler(async(req,res)=>{
- // @desc    Logout user
+// @desc    Logout user
 // @route   POST /api/users/logout
 // @access  Private
-  // Any additional server-side logic can go here
-
+const userLogOut = asyncHandler(async(req,res)=>{
   await User.findByIdAndUpdate(
     req.user._id,{
         $set:{
