@@ -3,9 +3,6 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
 }
-.fontStyle{
-    font-family: "Barlow", sans-serif;
-}
 .innerContainer{
     margin-top: 25px;
     border-radius: 10px;

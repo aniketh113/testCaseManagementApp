@@ -9,9 +9,10 @@ const Projecthomescreen = () => {
   }
   return (
     <div>
-        <nav className="nav nav-pills bg-light p-2 text-size-xl">
+        <nav className="nav nav-pills bg-light p-2 sticky-top">
             <a className="nav-link active" onClick={()=>submitHandler(<Projects/>)}>Projects</a>
             <a className="nav-link" onClick={()=>submitHandler(<Documentations/>)} >Documentations</a>
+            <a className='nav-link' href='/profile'>Profile</a>
         </nav>
         <div>
           {component}

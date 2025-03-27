@@ -110,17 +110,22 @@ const createTestScenarios= asyncHandler(async(req,res)=>{
   }
   })
 
-// @desc    this is to fetch the projects for the user requesting it.
+// @desc    this is to fetch the projects for the client requesting it.
 // POST     /api/project/getprojects
 // @access  Private
 const getUserProjects = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     const projects = await Project.find({_id: { $in: user.projects } })
-    const projectNames = projects.map(project => project.name);
+    const projectDetails = projects.map(project => ({
+      id:project._id,
+      name: project.name,
+      createdAt: project.createdAt,
+      updatedAt: project.updatedAt
+  }));
   if (user) {
     res.json({
       _id: user._id,
-      projects: projectNames,
+      projects: projectDetails,
     });
   } else {
     res.status(404);
@@ -128,4 +133,21 @@ const getUserProjects = asyncHandler(async (req, res) => {
   }
 });
 
-export {createProject, createSubProject, createTestCases, createTestScenarios, getUserProjects}
+// @desc    this is to delete the project for the client requesting it.
+// POST     /api/project/deleteproject
+// @access  Private
+const deleteProject = asyncHandler(async (req,res)=>{
+  const { id } = req.params;
+  
+  try {
+    const project = await Project.findByIdAndDelete(id);
+    if (!project) {
+      return res.status(404).json({ message: 'Project not found' });
+    }
+    res.status(200).json({ message: 'Project deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+export {createProject, createSubProject, createTestCases, createTestScenarios, getUserProjects, deleteProject}
