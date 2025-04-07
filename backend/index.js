@@ -5,9 +5,10 @@ import userRoutes from "./routes/userRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js"
 import cookieParser from "cookie-parser";
 import cors from "cors"
+
 const app = express();
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN.split(','),
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
 };
 

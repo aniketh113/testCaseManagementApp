@@ -49,7 +49,7 @@ const Homescreen = () => {
         </div>
         <div className="row text-center">
           <div className="col fontStyle">
-          <h5>We are almot here if you have account please login or else please register to start with us.</h5>
+          <h5>We are almost here if you have account please login or else please register to start with us.</h5>
           </div>
         </div>
         <div className='innerContainer pt-4'>
