@@ -5,9 +5,12 @@ import Cookies from 'js-cookie';
 import { BsPlusLg, BsFillTrash3Fill } from "react-icons/bs";
 import '../css/globalstyle.css';
 import '../css/projectscreen.css';
+import Subprojects from './subprojects.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+  const navigate = useNavigate();
   const [name,setName] = useState('') 
   const fetchUserProjects = async () => {
     const userInfo = Cookies.get('Token');
@@ -50,7 +53,9 @@ const Projects = () => {
       console.error(error);
     }
   };
-
+  const subprojectsHandler = async (projectId) => {
+          navigate(`/subprojects/${projectId}`)
+        }; 
   useEffect(() => {
     fetchUserProjects();
   }, []);
@@ -85,7 +90,7 @@ const Projects = () => {
                   projects.map((project, index) =>
                     <tr className="tableRow" key={index}>
                     <th scope='row'>{index+1}</th>
-                    <td>{project.name}</td>
+                    <td><a  onClick={ ()=>subprojectsHandler(project.id)}>{project.name}</a></td>
                     <td>{project.createdAt}</td>
                     <td>{project.updatedAt}</td>
                     <td><span><button onClick={()=>deleteHandler(project.id)}  className="input-group-text">{<BsFillTrash3Fill/>}</button></span></td>

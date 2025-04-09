@@ -6,6 +6,7 @@ import Profilescreen from './screens/Profilescreen';
 import Loginscreen from './screens/Loginscreen';
 import Projecthomescreen from './screens/Projecthomescreen';
 import Projects from './screens/Projects';
+import Subprojects from './screens/subprojects';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path='/profile' element={<Profilescreen />} />
         <Route path='/dashboard' element={<Projecthomescreen />}/>
         <Route path='/projects' element={<Projects />}/>
+        <Route path='/subprojects/:projectid' element={<Subprojects/>}/>
       </Routes>
     </Router>
   );
