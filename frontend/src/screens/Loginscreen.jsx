@@ -5,6 +5,7 @@ import { baseURL } from '../constants/utils.js';
 const Loginscreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('')
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -17,6 +18,12 @@ const Loginscreen = () => {
       navigate('/profile');
     } catch (error) {
       console.error(error);
+      const errorMessage = error.status
+      if(errorMessage === 401){
+        setLoginError('Invalid Email or Password')
+      }else{
+        setLoginError('')
+      }
     }
   };
 
@@ -39,6 +46,9 @@ const Loginscreen = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+        <div className="mb-2 text-danger">
+          { loginError}
         </div>
         <button type="submit">Login</button>
       </form>
