@@ -1,36 +1,9 @@
 import '../css/Homescreen.css';
 import '../css/globalstyle.css';
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { baseURL } from '../constants/utils.js';
+import React from 'react';
+import Loginform from '../components/LoginForm.jsx';
 
 const Homescreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('')
-  const navigate = useNavigate();
-  
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(`${baseURL}/api/users/login`, { email, password },{
-        withCredentials: true // Necessary to receive cookies
-      });
-      console.log(data)
-      navigate('/profile');
-    } catch (error) {
-      console.error(error);
-      const errorMessage = error.status
-      if(errorMessage === 401){
-        setLoginError('Inavlid Email or Password')
-      }else{
-        setLoginError('')
-      }
-    }
-  };
-
-
     return (
       <div className='container-fluid'>
         <nav className="navbar navbar-expand-lg bg-transperent">
@@ -67,28 +40,7 @@ const Homescreen = () => {
             <img class="img-fluid rounded mb-4 mb-lg-0" id='coverimage' src="/sharedpictures/coverimage.svg" alt="..." />
             </div>
               <div className='col-4'>
-              <form onSubmit={submitHandler}>
-                    <div className='mb-3 me-3'>
-                      <label className='form-label'>Email Address</label>
-                      <input
-                        type="email" className='form-control'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className='mb-3 me-3'>
-                      <label className='form-label'>Password</label>
-                      <input
-                        type="password" className='form-control'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    <div className="text-danger mb-3">
-                      { loginError}
-                    </div>
-                    <button type="submit" className='btn btn-dark btn-block mb-3'>Login</button>
-                  </form>
+                <Loginform/>
                 <a className="btn btn-primary mb-3" href="/register">Register Here</a>              
               </div>
             </div>
