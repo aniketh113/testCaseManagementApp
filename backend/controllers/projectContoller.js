@@ -32,18 +32,20 @@ const createProject = asyncHandler(async (req, res) => {
 // POST     /api/project/createsubproject
 // @access  Private
 const createSubProject = asyncHandler(async(req,res)=>{
-  const { name, projectid} = req.body;
+  const { name, projectId} = req.body;
+  console.log(projectId)
     const user = await User.findById(req.user._id);
     if (user) {
       const subproject = await Subproject.create({
-        name
+        name,
+        projectId
       });
-   await Project.findByIdAndUpdate(projectid, {
+   await Project.findByIdAndUpdate(projectId, {
         $push: {
           subproject: subproject._id
         }
       });
-
+      console.log("inside sub project creating")
       res.status(201).json({
         name: subproject.name,
         subprojectid: subproject._id
@@ -134,11 +136,10 @@ const getUserProjects = asyncHandler(async (req, res) => {
 });
 
 // @desc    this is to delete the project for the client requesting it.
-// POST     /api/project/deleteproject
+// POST     /api/project/deleteproject/:id
 // @access  Private
 const deleteProject = asyncHandler(async (req,res)=>{
   const { id } = req.params;
-  
   try {
     const project = await Project.findByIdAndDelete(id);
     if (!project) {
@@ -150,4 +151,60 @@ const deleteProject = asyncHandler(async (req,res)=>{
     res.status(500).json({ message: 'Server error' });
   }
 });
-export {createProject, createSubProject, createTestCases, createTestScenarios, getUserProjects, deleteProject}
+
+// @desc    this is to fetch the projects for the client requesting it.
+// POST     /api/project/getsubprojects/:id
+// @access  Private
+const getUserSubProjects = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(req.user._id);
+  const projects = await Project.find({_id: { $in: user.projects } })
+  const selectedProject = projects.filter(project => project.id == id).flatMap(subproject => subproject.subproject)
+  const subprojects = await Subproject.find({_id: { $in: selectedProject } })
+  const subProjectDetails = subprojects.map(project => ({
+    id:project._id,
+    name: project.name,
+    createdAt: project.createdAt,
+    updatedAt: project.updatedAt
+}));
+if (user) {
+  res.json({
+    subprojects: subProjectDetails,
+  });
+} else {
+  res.status(404);
+  throw new Error('User not found');
+}
+});
+
+// @desc    this is to delete the project for the client requesting it.
+// POST     /api/project/deletesubproject/:id
+// @access  Private
+const deleteSubProject = asyncHandler(async (req,res)=>{
+  const { id } = req.params;
+  try {
+    const insubproject = await Subproject.findByIdAndDelete(id);
+    console.log(id)
+    if (!insubproject) {
+      return res.status(404).json({ message: 'Project not found' });
+    }
+    await Project.findByIdAndUpdate(insubproject.projectId, {
+        $pull: { subproject: id }
+        });
+        console.log(id)
+    res.status(200).json({ message: 'Sub Project deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+export {createProject, 
+  createSubProject, 
+  createTestCases, 
+  createTestScenarios, 
+  getUserProjects,
+  deleteProject, 
+  getUserSubProjects,
+  deleteSubProject
+}
