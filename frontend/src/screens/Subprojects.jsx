@@ -1,7 +1,7 @@
 import React, { useEffect, useState, } from 'react';
 import axios from 'axios';
 import { baseURL } from '../constants/utils.js';
-import { BsPlusLg, BsFillTrash3Fill } from "react-icons/bs";
+import { BsPlusLg, BsFillTrash3Fill,BsArrowLeft } from "react-icons/bs";
 import '../css/globalstyle.css';
 import '../css/projectscreen.css';
 import { useParams } from 'react-router-dom';
@@ -63,7 +63,15 @@ useEffect(() => {
     <div className='container'>
         <div className='row'>
           <div className='col ps-0'>
-              <h2>Sub Projects</h2>
+            <a href='/dashboard'><span><BsArrowLeft size={30}/></span></a>
+            <h2>Sub Projects</h2>
+          
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/dashboard">Projects</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">Sub Projects</a></li>
+            </ol>
+          </nav>
           </div>
         </div>
         <div className='row'>
