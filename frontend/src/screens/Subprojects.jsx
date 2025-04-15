@@ -10,8 +10,8 @@ const Subprojects = ()=>{
     const [inSubProjects,setInSubProjects] =useState([]) 
     const [name,setName]=useState('')
     const {projectid} = useParams();
-
-    const subprojectsHandler = async () => {
+    // this function is getting the projects as we land on page, handled in useEffect.
+    const getsubprojectsHandler = async () => {
               try {
                  const subProjects = await axios.get( `${baseURL}/api/project/getsubprojects/${projectid}`,
                     {
@@ -23,25 +23,49 @@ const Subprojects = ()=>{
                 console.error(error);
               }
             }; 
+    // this function is submiting the subproject created.
     const submitHandler = async (e) => {
                 e.preventDefault();
                 try {
-                    console.log({name,projectid})
-                    await axios.post( `${baseURL}/api/project/createsubproject`, {name,projectid},
+                    const data = {
+                      name:name,
+                      projectId:projectid 
+                    }
+                    console.log(data)
+                    await axios.post( `${baseURL}/api/project/createsubproject`, data,
                       {
                         withCredentials:true
                       });
-                    
+                      getsubprojectsHandler();
+                      console.log("Creating a subproject")
                 } catch (error) {
                   console.error(error);
                 }
             };
+    // this function is deleting the subproject selected.
+    const deleteHandler = async (projectId) => {
+              try {
+                  await axios.delete( `${baseURL}/api/project/deletesubproject/${projectId}`,
+                    {
+                      withCredentials:true
+                    });
+                  setInSubProjects(inSubProjects.filter(project => project._id !== projectId));
+                  getsubprojectsHandler();
+              } catch (error) {
+                console.error(error);
+              }
+            };         
 
 useEffect(() => {
-    subprojectsHandler();
+    getsubprojectsHandler();
   }, []);
     return (
     <div className='container'>
+        <div className='row'>
+          <div className='col ps-0'>
+              <h2>Sub Projects</h2>
+          </div>
+        </div>
         <div className='row'>
             <div className='col-3 ps-0'>
                 <div className='input-group'>
@@ -58,7 +82,8 @@ useEffect(() => {
                             {/* <img src="..." className="card-img-top" alt="..."/> */}
                             <div className="card-body">
                             <h5 className="card-title"><a>{project.name}</a></h5>
-                            <a href="#" className="btn btn-primary">Go somewhere</a>
+                            <button className="input-group-text" onClick={()=>{deleteHandler(project.id)}}>{<BsFillTrash3Fill/>}</button>
+                            <a href="#" className="btn btn-primary">Go</a>
                             </div>
                             </div>
                 </div>

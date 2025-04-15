@@ -1,5 +1,13 @@
 import express from 'express'
-import { createProject, createSubProject, createTestCases, createTestScenarios,getUserProjects, deleteProject, getUserSubProjects} from '../controllers/projectContoller.js'
+import { createProject,
+    createSubProject,
+    createTestCases,
+    createTestScenarios,
+    getUserProjects,
+    deleteProject,
+    getUserSubProjects,
+    deleteSubProject
+} from '../controllers/projectContoller.js'
 import protect from '../middleware/authMiddleware.js'
 const router = express.Router();
 
@@ -10,4 +18,5 @@ router.post('/createscenario',protect,createTestScenarios);
 router.get('/getprojects',protect,getUserProjects);
 router.delete('/deleteproject/:id',protect,deleteProject);
 router.get('/getsubprojects/:id',protect,getUserSubProjects);
+router.delete('/deletesubproject/:id',protect,deleteSubProject)
 export default router
