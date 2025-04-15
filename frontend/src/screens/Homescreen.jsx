@@ -8,6 +8,7 @@ import { baseURL } from '../constants/utils.js';
 const Homescreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('')
   const navigate = useNavigate();
   
   const submitHandler = async (e) => {
@@ -20,8 +21,16 @@ const Homescreen = () => {
       navigate('/profile');
     } catch (error) {
       console.error(error);
+      const errorMessage = error.status
+      if(errorMessage === 401){
+        setLoginError('Inavlid Email or Password')
+      }else{
+        setLoginError('')
+      }
     }
   };
+
+
     return (
       <div className='container-fluid'>
         <nav className="navbar navbar-expand-lg bg-transperent">
@@ -49,7 +58,7 @@ const Homescreen = () => {
         </div>
         <div className="row text-center">
           <div className="col fontStyle">
-          <h5>We are almot here if you have account please login or else please register to start with us.</h5>
+          <h5>We are almost here if you have account please login or else please register to start with us.</h5>
           </div>
         </div>
         <div className='innerContainer pt-4'>
@@ -75,9 +84,12 @@ const Homescreen = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                    <div className="text-danger mb-3">
+                      { loginError}
+                    </div>
                     <button type="submit" className='btn btn-dark btn-block mb-3'>Login</button>
                   </form>
-                <a className="btn btn-primary mb-3" href="/register">Register Here</a>
+                <a className="btn btn-primary mb-3" href="/register">Register Here</a>              
               </div>
             </div>
         </div>
