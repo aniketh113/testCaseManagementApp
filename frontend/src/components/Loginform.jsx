@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { baseURL } from '../constants/utils.js';
+import '../css/globalstyle.css'
 const Loginform = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +30,7 @@ const Loginform = () => {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h2 className='fontStyle'>Login</h2>
       <form onSubmit={submitHandler}>
                     <div className='mb-3 me-3'>
                       <label className='form-label'>Email Address</label>
