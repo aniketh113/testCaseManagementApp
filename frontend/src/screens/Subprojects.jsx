@@ -67,9 +67,9 @@ useEffect(() => {
             <h2>Sub Projects</h2>
           
           <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/dashboard">Projects</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Sub Projects</a></li>
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item"><a href="/dashboard">Projects</a></li>
+              <li className="breadcrumb-item active" aria-current="page"><a href="#">Sub Projects</a></li>
             </ol>
           </nav>
           </div>

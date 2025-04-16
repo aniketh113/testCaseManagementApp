@@ -11,9 +11,7 @@ body{
     box-shadow: rgba(0, 0, 0, 0.34) 0px 5px 10px;
 }
 #coverimage{
-    height: 400px;
-    width: 900px;
-    border: 1px solid black;
-    border-radius: 50%;
+    height: 340px;
+    width: 600px;
     box-shadow: rgba(0.30, 0, 0.2, 0.34) 0px 8px 20px;
 }
