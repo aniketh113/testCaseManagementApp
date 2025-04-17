@@ -77,10 +77,12 @@ useEffect(() => {
         </div>
         <div className='row'>
             <div className='col-3 ps-0'>
+              <form onSubmit={submitHandler} >
                 <div className='input-group'>
-                    <input  className='form-control' type='text' value={name} onChange={(e) => setName(e.target.value)}/>
-                    <button onClick={submitHandler}  className="input-group-text">{<BsPlusLg/>}</button>
-                </div>      
+                    <input  className='form-control' type='text' aria-describedby="button-addon2" value={name} onChange={(e) => setName(e.target.value)}/>
+                    <button className="btn btn-secondary" id="button-addon2">{<BsPlusLg/>}</button>
+                </div>
+                </form>      
             </div>        
         </div>
         <div className='row gx-3'>  

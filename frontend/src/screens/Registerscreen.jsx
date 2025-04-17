@@ -8,6 +8,7 @@ import { IoMdMail } from "react-icons/io";
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import '../css/registerscreen.css';
+import '../css/globalstyle.css'
 
 const Registerscreen = () => {
   const [name, setName] = useState('');
@@ -37,7 +38,7 @@ const Registerscreen = () => {
       <div className='container d-flex justify-content-center align-items-center min-vh-100'>
         <div className='row p-3 border bg-white shadow rounded-4 box-area'>
           <div className='col-md-5 position-relative d-flex text-center justify-content-center align-items-center flex-column rounded-4 shadow left-box'>
-            <a className="navbar-brand position-absolute top-0 start-0 text-white pt-3 ps-2 d-flex" href="#">
+            <a className="navbar-brand position-absolute top-0 start-0 text-white pt-3 ps-2 d-flex" href="/">
               <img src="/sharedpictures/TCM.svg" alt="Logo" width="40" height="30" class="d-inline-block align-text-top"/>
               <span>TCM</span>
             </a>
@@ -98,7 +99,7 @@ const Registerscreen = () => {
                   />
                 </div>
                 <div className="input-group justify-content-center">
-                  <button type="submit" className="btn btn-lg btn-primary rounded-5 button">Get Started</button>
+                  <button type="submit" className="btn btn-lg btn-primary rounded-5 submitBtn">Get Started</button>
                 </div>
               </form>
             </div>
