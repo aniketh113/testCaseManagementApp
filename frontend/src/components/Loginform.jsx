@@ -37,6 +37,7 @@ const Loginform = () => {
                       <input
                         type="email" className='form-control'
                         value={email}
+                        required
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
@@ -45,6 +46,7 @@ const Loginform = () => {
                       <input
                         type="password" className='form-control'
                         value={password}
+                        required
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
