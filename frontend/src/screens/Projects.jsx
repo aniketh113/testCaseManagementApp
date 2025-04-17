@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { BsPlusLg, BsFillTrash3Fill } from "react-icons/bs";
 import '../css/globalstyle.css';
 import '../css/projectscreen.css';
-import Subprojects from './subprojects.jsx';
+import {dateFormat} from '../utils/dateFormat.js';
 import { useNavigate } from 'react-router-dom';
 
 const Projects = () => {
@@ -91,8 +91,8 @@ const Projects = () => {
                     <tr className="tableRow" key={index}>
                     <th scope='row'>{index+1}</th>
                     <td><a  onClick={ ()=>subprojectsHandler(project.id)}>{project.name}</a></td>
-                    <td>{project.createdAt}</td>
-                    <td>{project.updatedAt}</td>
+                    <td>{dateFormat(project.createdAt)}</td>
+                    <td>{dateFormat(project.updatedAt)}</td>
                     <td><span><button onClick={()=>deleteHandler(project.id)}  className="input-group-text">{<BsFillTrash3Fill/>}</button></span></td>
                   </tr>
                 )}
