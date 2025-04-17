@@ -1,3 +1,6 @@
-.fontStyle{
+*{
     font-family: "Barlow", sans-serif;
+}
+.submitBtn{
+    padding :10px 55px;
 }

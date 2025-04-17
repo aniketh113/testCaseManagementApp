@@ -30,29 +30,42 @@ const Loginform = () => {
 
   return (
     <div>
-      <h2 className='fontStyle'>Login</h2>
-      <form onSubmit={submitHandler}>
-                    <div className='mb-3 me-3'>
-                      <label className='form-label'>Email Address</label>
-                      <input
-                        type="email" className='form-control'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className='mb-3 me-3'>
-                      <label className='form-label'>Password</label>
-                      <input
-                        type="password" className='form-control'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    <div className="text-danger mb-3">
-                      { loginError}
-                    </div>
-                    <button type="submit" className='btn btn-dark btn-block mb-3'>Login</button>
-                  </form>
+      <div className='row'>
+        <h2 className='fontStyle'>Login</h2>
+      </div>
+      <div className='row'>
+        <div className='col-12'>
+        <form onSubmit={submitHandler}>
+                      <div className='mb-3 me-3'>
+                        <label className='form-label'>Email Address</label>
+                        <input
+                          type="email" className='form-control'
+                          value={email}
+                          required
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className='mb-3 me-3'>
+                        <label className='form-label'>Password</label>
+                        <input
+                          type="password" className='form-control'
+                          value={password}
+                          required
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </div>
+                      <div className="text-danger mb-3">
+                        { loginError}
+                      </div>
+        <div className='row'>
+              <div className='col'>
+                <button type="submit" className='btn btn-md btn-dark rounded-5 ms-0 me-2 submitBtn'>Login</button>
+                <a href="/register" className="btn btn-md btn-primary rounded-5 submitBtn">Register</a> 
+              </div>
+        </div>
+        </form>
+        </div>
+      </div>
     </div>
   );
 };

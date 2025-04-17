@@ -25,7 +25,6 @@ const Homescreen = () => {
             </div>
               <div className='col-4'>
                 <Loginform/>
-                <a className="btn btn-primary mb-3" href="/register">Register Here</a>              
               </div>
             </div>
         </div>
