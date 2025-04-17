@@ -3,5 +3,15 @@
 }
 .card{
     width: 18rem;
-    height: 8rem;
+    height: auto;
+  .deleteButton{
+    visibility: hidden;
+    transition-delay: 200ms;
+  }  
+}
+.card:hover{
+    .deleteButton{
+        transition-delay:200ms;
+        visibility:inherit;
+    }
 }
