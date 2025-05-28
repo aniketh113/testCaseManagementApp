@@ -6,10 +6,12 @@ import '../css/globalstyle.css';
 import '../css/projectscreen.css';
 import { useParams } from 'react-router-dom';
 import { dateFormat,timeSinceUpdate } from '../utils/dateFormat.js';
-  
+import { useNavigate } from 'react-router-dom';
+
 const Subprojects = ()=>{
     const [inSubProjects,setInSubProjects] =useState([]) 
     const [name,setName]=useState('')
+    const navigate = useNavigate();
     const {projectid} = useParams();
     // this function is getting the projects as we land on page, handled in useEffect.
     const getsubprojectsHandler = async () => {
@@ -19,7 +21,6 @@ const Subprojects = ()=>{
                       withCredentials:true
                     });
                     setInSubProjects(subProjects.data.subprojects)
-                    console.log(subProjects.data.subprojects)
               } catch (error) {
                 console.error(error);
               }
@@ -56,7 +57,9 @@ const Subprojects = ()=>{
                 console.error(error);
               }
             };         
-
+    const testCaseHandler = async (subprojectId) => {
+            navigate(`/testcases/${subprojectId}`)
+          }; 
 useEffect(() => {
     getsubprojectsHandler();
   }, []);
@@ -92,22 +95,17 @@ useEffect(() => {
                             <div className="card mt-3" key={index+1}>
                             <div className='card-header d-flex justify-content-between'>
                               <h5 className="card-title d-inline "><p className='fontStyle'>{project.name}</p></h5>
-                              
                               <span className="d-inline deleteButton" onClick={()=>{deleteHandler(project.id)}}>{<BsFillTrash3Fill/>}</span>
                             </div>
-                            {/* <img src="..." className="card-img-top" alt="..."/> */}
                             <div className="card-body d-flex justify-content-between">
-                            <a href="#" className="btn btn-primary">Go</a>
+                            <a onClick={()=> testCaseHandler(project.id)} className="btn btn-primary">Go</a>
                             <p>Updated: {timeSinceUpdate(project.updatedAt)}</p>
                             </div>
                             </div>
-                </div>
-            )
-         }
-            
+                </div>)
+            }   
         </div>
     </div>
-    )
-}
+    )}
 
 export default Subprojects;

@@ -6,9 +6,9 @@ const handleToggle = () => {
    };
     return(
         <div>
-          <nav className="navbar navbar-expand-md bg-transparent" >
-            <div className="container-fluid">
-              <a className="navbar-brand" href="/"><img src="/sharedpictures/TCM.svg" alt="Logo" width="50" height="50" className="d-inline-block align-text-top"></img></a>
+          <nav className="navbar navbar-expand-md bg-tranparent m-0 p-0 border-bottom" >
+            <div className="container-fluid ">
+              <a className="navbar-brand" href="/"><img src="/sharedpictures/TCM.svg" alt="Logo" width="35" height="35" className="d-inline-block align-text-top"></img></a>
               <a className='navbar-brand heading'>TCM</a>
               <button onClick={handleToggle} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded={isToggled} >
                 <span className="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@ const handleToggle = () => {
                 </ul>
               </div>
             </div>
-  </nav>
+          </nav>
         </div>
     )
 }

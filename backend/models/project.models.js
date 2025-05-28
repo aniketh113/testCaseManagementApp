@@ -70,20 +70,8 @@ scenario:{
 },{timestamps:true})
 
 const Testscenario = mongoose.model('Testscenario',testScenario)
-
-
-
-
-const Testcase= mongoose.model('Testcase',testCaseSchema)
-
-
-
-
-  
+const Testcase= mongoose.model('Testcase',testCaseSchema) 
 const Subproject = mongoose.model('Subproject', subProjectSchema);
+const Project = mongoose.model("Project", projectSchema)
 
-
-
- const Project = mongoose.model("Project", projectSchema)
-
- export  {Project, Subproject, Testcase, Testscenario }
+export  {Project, Subproject, Testcase, Testscenario }

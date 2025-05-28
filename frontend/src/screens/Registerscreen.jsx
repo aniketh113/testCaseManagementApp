@@ -34,7 +34,7 @@ const Registerscreen = () => {
   };
 
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid m-0 p-0'>
       <div className='container d-flex justify-content-center align-items-center min-vh-100'>
         <div className='row p-3 border bg-white shadow rounded-4 box-area'>
           <div className='col-md-5 position-relative d-flex text-center justify-content-center align-items-center flex-column rounded-4 shadow left-box'>

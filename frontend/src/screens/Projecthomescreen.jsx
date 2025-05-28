@@ -8,8 +8,8 @@ const Projecthomescreen = () => {
     setComponent(newComponent)
   }
   return (
-    <div>
-        <nav className="nav nav-pills bg-light p-2 sticky-top">
+    <div className='m-0 p-0'>
+        <nav className="nav nav-pills bg-light p-2 sticky-top ">
             <a className="nav-link active" onClick={()=>submitHandler(<Projects/>)}>Projects</a>
             <a className="nav-link" onClick={()=>submitHandler(<Documentations/>)} >Documentations</a>
             <a className='nav-link' href='/profile'>Profile</a>
