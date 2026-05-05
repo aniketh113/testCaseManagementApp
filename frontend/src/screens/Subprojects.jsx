@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from 'react';
+import { useEffect, useState, } from 'react';
 import axios from 'axios';
 import { baseURL } from '../constants/utils.js';
 import { BsPlusLg, BsFillTrash3Fill,BsArrowLeft } from "react-icons/bs";

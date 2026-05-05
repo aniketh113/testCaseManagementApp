@@ -159,7 +159,7 @@ const deleteSubProject = asyncHandler(async (req,res)=>{
     const insubproject = await Subproject.findByIdAndDelete(id);
     console.log(id)
     if (!insubproject) {
-      return res.status(404).json({ message: 'Project not found' });
+      return res.status(404).json({ message: 'Sub Project not found' });
     }
     await Project.findByIdAndUpdate(insubproject.projectId, {
         $pull: { subproject: id }
@@ -212,6 +212,30 @@ const getTestCases = asyncHandler(async(req,res)=>{
     }
   )
 })
+
+// @desc    this is to delete testcases under the sub project which they are in.
+// POST     /api/project/deletetestcase
+// @access  Private
+const deleteTestCase = asyncHandler(async(req,res)=>{
+const { id } = req.params;
+  try {
+    const inTestCase = await Testcase.findByIdAndDelete(id);
+    console.log(id)
+    if (!inTestCase) {
+      return res.status(404).json({ message: 'Test Case not found' });
+    }
+    await Subproject.findByIdAndUpdate(inTestCase.testCaseSchema, {
+        $pull: { testCaseSchema: id }
+        });
+        console.log(id)
+    res.status(200).json({ message: 'Sub Project deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+})
+
+
 export {createProject, 
   createSubProject, 
   createTestCases,
@@ -220,5 +244,6 @@ export {createProject,
   getUserProjects,
   deleteProject, 
   getUserSubProjects,
-  deleteSubProject
+  deleteSubProject,
+  deleteTestCase
 }
