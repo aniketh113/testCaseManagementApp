@@ -7,7 +7,7 @@ const Loginscreen = () => {
  
   return (
     <div>
-        <div className='container-fluid'>
+        <div className='container-fluid m-0 p-0'>
         <Navbar/>
            <div className='container loginFormBox'> 
             <div className='row p-4'>

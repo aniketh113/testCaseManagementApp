@@ -1,0 +1,12 @@
+.testCaseTable{
+    min-height:550px;
+}
+.content-header{
+    border-bottom: 1px;
+}
+.inputDisplay {
+    display:none;
+}
+ .addButtonDisplay{
+    display:none;
+}
