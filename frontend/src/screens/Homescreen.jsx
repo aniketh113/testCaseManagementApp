@@ -7,7 +7,7 @@ import Footer from '../components/Footer.jsx';
 
 const Homescreen = () => {
     return (
-      <div className='container-fluid'>
+      <div className='container-fluid m-0 p-0'>
       <Navbar/>
       <div className="container">
         <div className="row text-center">

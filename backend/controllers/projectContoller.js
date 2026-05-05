@@ -57,34 +57,6 @@ const createSubProject = asyncHandler(async(req,res)=>{
 })
 
 // @desc    this is to create testcases under the sub project which they are in.
-// POST     /api/project/createtestcase
-// @access  Private
-const createTestCases= asyncHandler(async(req,res)=>{
-const{testcasename,status,lastexecutionstatus,priority,assignedto ,subprojectid}= req.body;
-
-const user = await User.findById(req.user._id);
-
-if(user){
-  const testcase = await Testcase.create({
-    testcasename,status,lastexecutionstatus,priority,assignedto
-  })
-  await Subproject.findByIdAndUpdate(subprojectid, {
-    $push: {
-      testCaseSchema: testcase._id
-    }
-  });
-  res.status(201).json({
-    name: testcase.testcasename,
-    Testcaseid: testcase._id
-  });
-}
-else{
-  res.status(404);
-  throw new Error('User not logged in');
-}
-})
-
-// @desc    this is to create testcases under the sub project which they are in.
 // POST     /api/project/createscenario
 // @access  Private
 const createTestScenarios= asyncHandler(async(req,res)=>{
@@ -164,6 +136,7 @@ const getUserSubProjects = asyncHandler(async (req, res) => {
   const subProjectDetails = subprojects.map(project => ({
     id:project._id,
     name: project.name,
+    testCaseSchema:project.testCaseSchema,
     createdAt: project.createdAt,
     updatedAt: project.updatedAt
 }));
@@ -177,7 +150,7 @@ if (user) {
 }
 });
 
-// @desc    this is to delete the project for the client requesting it.
+// @desc    this is to delete the sub project for the client requesting it.
 // POST     /api/project/deletesubproject/:id
 // @access  Private
 const deleteSubProject = asyncHandler(async (req,res)=>{
@@ -186,7 +159,7 @@ const deleteSubProject = asyncHandler(async (req,res)=>{
     const insubproject = await Subproject.findByIdAndDelete(id);
     console.log(id)
     if (!insubproject) {
-      return res.status(404).json({ message: 'Project not found' });
+      return res.status(404).json({ message: 'Sub Project not found' });
     }
     await Project.findByIdAndUpdate(insubproject.projectId, {
         $pull: { subproject: id }
@@ -199,12 +172,78 @@ const deleteSubProject = asyncHandler(async (req,res)=>{
   }
 });
 
+// @desc    this is to create testcases under the sub project which they are in.
+// POST     /api/project/createtestcase
+// @access  Private
+const createTestCases= asyncHandler(async(req,res)=>{
+  const{testcasename,status,lastexecutionstatus,priority,assignedto ,subprojectid}= req.body;
+  const user = await User.findById(req.user._id);
+  if(user){
+    const testcase = await Testcase.create({
+      testcasename,status,lastexecutionstatus,priority,assignedto
+    })
+    await Subproject.findByIdAndUpdate(subprojectid, {
+      $push: {
+        testCaseSchema: testcase._id
+      }
+    });
+    res.status(201).json({
+      name: testcase.testcasename,
+      Testcaseid: testcase._id
+    });
+  }
+  else{
+    res.status(404);
+    throw new Error('User not logged in');
+  }
+  })
+
+// @desc    this is to fetch testcases under the sub project which they are in.
+// POST     /api/project/gettestcases
+// @access  Private
+const getTestCases = asyncHandler(async(req,res)=>{
+  const { id } = req.params;
+  const subProject = await Subproject.findById(id);
+  const testCases = await Testcase.find({_id: { $in: subProject.testCaseSchema} })
+  res.json(
+    {
+      subProjectName: subProject.name,
+      testcases:testCases
+    }
+  )
+})
+
+// @desc    this is to delete testcases under the sub project which they are in.
+// POST     /api/project/deletetestcase
+// @access  Private
+const deleteTestCase = asyncHandler(async(req,res)=>{
+const { id } = req.params;
+  try {
+    const inTestCase = await Testcase.findByIdAndDelete(id);
+    console.log(id)
+    if (!inTestCase) {
+      return res.status(404).json({ message: 'Test Case not found' });
+    }
+    await Subproject.findByIdAndUpdate(inTestCase.testCaseSchema, {
+        $pull: { testCaseSchema: id }
+        });
+        console.log(id)
+    res.status(200).json({ message: 'Sub Project deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+})
+
+
 export {createProject, 
   createSubProject, 
-  createTestCases, 
+  createTestCases,
+  getTestCases, 
   createTestScenarios, 
   getUserProjects,
   deleteProject, 
   getUserSubProjects,
-  deleteSubProject
+  deleteSubProject,
+  deleteTestCase
 }

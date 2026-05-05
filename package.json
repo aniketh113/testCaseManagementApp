@@ -18,7 +18,9 @@
     "express": "^4.21.2",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.10.1",
-    "nodemon": "^3.1.9"
+    "mongoose": "^8.21.0",
+    "mquery": "^6.0.0",
+    "nodemon": "^3.1.9",
+    "npm": "^11.7.0"
   }
 }

@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import {DB_NAME} from '../utils/contants.js'
 
 mongoose.set("strictQuery", false);
-dotenv.config({path: 'C:/Users/Yelgo/OneDrive/Desktop/testCaseManagement/backend/.env'});
+dotenv.config();
 const connectDB = async () => {
   try {
     console.log(process.env.MONGO_URI)
